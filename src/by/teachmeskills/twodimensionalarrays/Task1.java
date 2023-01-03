@@ -20,8 +20,8 @@ public class Task1 {
         }
 
         System.out.println("Initial array: ");
-        for (int i = 0; i < array.length; i++) {
-            System.out.println(Arrays.deepToString(array[i]));
+        for (int[][] ints : array) {
+            System.out.println(Arrays.deepToString(ints));
         }
 
         for (int i = 0; i < array.length; i++) {
@@ -33,8 +33,8 @@ public class Task1 {
         }
 
         System.out.println("Final array: ");
-        for (int i = 0; i < array.length; i++) {
-            System.out.println(Arrays.deepToString(array[i]));
+        for (int[][] ints : array) {
+            System.out.println(Arrays.deepToString(ints));
         }
     }
 }

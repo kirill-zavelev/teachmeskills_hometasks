@@ -16,8 +16,8 @@ public class Task2 {
             }
         }
 
-        for (int i = 0; i < stringArray.length; i++) {
-            System.out.println(Arrays.toString(stringArray[i])
+        for (String[] strings : stringArray) {
+            System.out.println(Arrays.toString(strings)
                     .replace(",", "")
                     .replace("[", "")
                     .replace("]", "")

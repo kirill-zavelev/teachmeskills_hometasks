@@ -20,11 +20,11 @@ public class Task4 {
 
         int sumForFirstArray = 0;
         int sumForSecondArray = 0;
-        for (int i = 0; i < firstArray.length; i++) {
-            sumForFirstArray += firstArray[i];
+        for (int firstArrayElement : firstArray) {
+            sumForFirstArray += firstArrayElement;
         }
-        for (int i = 0; i < secondArray.length; i++) {
-            sumForSecondArray += secondArray[i];
+        for (int secondArrayElement : secondArray) {
+            sumForSecondArray += secondArrayElement;
         }
         double averageForFirstArray = (double) sumForFirstArray / firstArray.length;
         double averageForSecondArray = (double) sumForSecondArray / secondArray.length;

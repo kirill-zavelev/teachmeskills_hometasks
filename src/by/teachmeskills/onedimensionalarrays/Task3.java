@@ -17,25 +17,20 @@ public class Task3 {
         }
         System.out.println("Array is: " + Arrays.toString(array));
 
-        int valueToCompareWith = array[0];
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] > valueToCompareWith) {
-                valueToCompareWith = array[i];
-            }
-        }
-        System.out.println("Max value from array is: " + valueToCompareWith);
-
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] < valueToCompareWith) {
-                valueToCompareWith = array[i];
-            }
-        }
-        System.out.println("Min value from array is: " + valueToCompareWith);
-
+        int valueToCompareForMax = array[0];
+        int valueToCompareForMin = array[0];
         int sum = 0;
-        for (int i = 0; i < array.length; i++) {
-            sum += array[i];
+        for (int arrayElement : array) {
+            if (arrayElement > valueToCompareForMax) {
+                valueToCompareForMax = arrayElement;
+            }
+            if (arrayElement < valueToCompareForMin) {
+                valueToCompareForMin = arrayElement;
+            }
+            sum += arrayElement;
         }
+        System.out.println("Max value from array is: " + valueToCompareForMax);
+        System.out.println("Min value from array is: " + valueToCompareForMin);
         double average = (double) sum / array.length;
         int avgNumber = (int) average;
         System.out.println("Average value from array is: " + avgNumber);
