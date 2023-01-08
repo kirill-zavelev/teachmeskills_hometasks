@@ -1,5 +1,7 @@
 package by.teachmeskills.classesAndObjects.computer;
 
+import java.util.Objects;
+
 public class Hdd {
     private static final String HDD_TYPE_MESSAGE = "Hdd type can be only External or Internal";
     private static final String HDD_TYPE_INTERNAL = "Internal";
@@ -15,7 +17,7 @@ public class Hdd {
     public Hdd(String name, int capacity, String type) {
         this.name = name;
         this.capacity = capacity;
-        if (type == HDD_TYPE_INTERNAL || type == HDD_TYPE_EXTERNAL) {
+        if (Objects.equals(type, HDD_TYPE_INTERNAL) || Objects.equals(type, HDD_TYPE_EXTERNAL)) {
             this.type = type;
         } else {
             System.out.println(HDD_TYPE_MESSAGE);
