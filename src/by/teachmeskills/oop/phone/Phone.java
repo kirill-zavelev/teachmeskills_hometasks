@@ -8,7 +8,6 @@ public class Phone {
     private double weight;
 
     public Phone() {
-
     }
 
     public Phone(String number, String model, double weight) {

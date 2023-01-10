@@ -23,15 +23,16 @@ public class Patient {
 
     public void assignDoctor() {
         final int treatmentCode = treatmentPlan.getTreatmentCode();
-        if (treatmentCode == FIRST_TREATMENT_CODE) {
-            System.out.printf(TREATMENT_PLAN_DESCRIPTION, Doctor.SURGEON);
-            surgeon.treat();
-        } else if (treatmentCode == SECOND_TREATMENT_CODE) {
-            System.out.printf(TREATMENT_PLAN_DESCRIPTION, Doctor.DENTIST);
-            dentist.treat();
-        } else {
-            System.out.printf(TREATMENT_PLAN_DESCRIPTION, Doctor.THERAPIST);
-            therapist.treat();
+        switch (treatmentCode) {
+            case FIRST_TREATMENT_CODE:
+                System.out.printf(TREATMENT_PLAN_DESCRIPTION, Doctor.SURGEON);
+                surgeon.treat();
+            case SECOND_TREATMENT_CODE:
+                System.out.printf(TREATMENT_PLAN_DESCRIPTION, Doctor.DENTIST);
+                dentist.treat();
+            default:
+                System.out.printf(TREATMENT_PLAN_DESCRIPTION, Doctor.THERAPIST);
+                therapist.treat();
         }
     }
 }
