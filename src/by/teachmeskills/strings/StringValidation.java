@@ -4,14 +4,23 @@ import java.util.regex.Pattern;
 
 public class StringValidation {
 
+    private static final String ANY_DIGIT_REGEX = "\\d";
+    private static final String ANY_ALPHABETIC_WITH_CASE_INSENSITIVE_REGEX = "[a-zA-Z]";
+
     private static final String DOCUMENT_FORMAT = "\\d{4}-[a-zA-Z]{3}-\\d{4}-[a-zA-Z]{3}-\\d[a-zA-Z]\\d[a-zA-Z]";
+
     private static final String INCORRECT_DOCUMENT_FORMAT_MSG = "Document format is incorrect, please use "
             + DOCUMENT_FORMAT;
 
     public static void printFirstTwoBlocksWithFourDigits(String document) {
         if (isDocumentAppliesRequiredFormat(document)) {
-            String newDocument = document.replaceAll("-[a-zA-Z]{3}", "");
-            System.out.println(newDocument.replaceAll("-\\d[a-zA-Z]\\d[a-zA-Z]", ""));
+            String newDocument = document.replaceAll("-"
+                    + ANY_ALPHABETIC_WITH_CASE_INSENSITIVE_REGEX + "{3}", "");
+            System.out.println(newDocument.replaceAll("-"
+                    + ANY_DIGIT_REGEX
+                    + ANY_ALPHABETIC_WITH_CASE_INSENSITIVE_REGEX
+                    + ANY_DIGIT_REGEX
+                    + ANY_ALPHABETIC_WITH_CASE_INSENSITIVE_REGEX, ""));
         } else {
             System.out.println(INCORRECT_DOCUMENT_FORMAT_MSG);
         }
@@ -19,7 +28,8 @@ public class StringValidation {
 
     public static void replaceWordBlocksWithAsterisk(String document) {
         if (isDocumentAppliesRequiredFormat(document)) {
-            System.out.println(document.replaceAll("[a-zA-Z]{3}", "***"));
+            System.out.println(document.replaceAll(ANY_ALPHABETIC_WITH_CASE_INSENSITIVE_REGEX
+                    + "{3}", "***"));
         } else {
             System.out.println(INCORRECT_DOCUMENT_FORMAT_MSG);
         }
@@ -27,13 +37,15 @@ public class StringValidation {
 
     public static String printOnlyWordsInCertainFormat(String document) {
         String documentWithSlashes = document.replaceAll("-", "/");
-        String documentWithoutDigits = documentWithSlashes.replaceAll("\\d/*", "");
+        String documentWithoutDigits = documentWithSlashes.replaceAll(ANY_DIGIT_REGEX + "/*", "");
+        StringBuilder sb = new StringBuilder(documentWithoutDigits)
+                .insert(documentWithoutDigits.length() - 1, "/");
         if (isDocumentAppliesRequiredFormat(document)) {
-            System.out.println(documentWithoutDigits);
+            System.out.println(sb);
         } else {
             System.out.println(INCORRECT_DOCUMENT_FORMAT_MSG);
         }
-        return documentWithoutDigits;
+        return sb.toString();
     }
 
     public static void printOnlyWordsInCertainFormatInUpperCaseWithStringBuilder(String document) {
@@ -65,9 +77,7 @@ public class StringValidation {
 
     public static void findIfDocumentStartsWith555(String document) {
         if (isDocumentAppliesRequiredFormat(document)) {
-            String firstThreeSymbols = document.substring(0, 3);
-            boolean isStarts = firstThreeSymbols
-                    .matches("^" + Pattern.compile(document.substring(0, 1)) + "{3,}");
+            boolean isStarts = document.toLowerCase().startsWith("555");
             if (isStarts) {
                 System.out.println(document + " starts with 555 sequence");
             } else {
@@ -79,8 +89,7 @@ public class StringValidation {
     }
 
     public static void findIfDocumentEndsWith1a2b(String document) {
-        String lastFourSymbols = document.substring(document.lastIndexOf("-") + 1);
-        boolean isEnds = lastFourSymbols.matches("\\d[a-z]\\d[a-z]");
+        boolean isEnds = document.toLowerCase().endsWith("1a2b");
         if (isEnds) {
             System.out.println(document + " ends with 1a2b sequence");
         } else {
