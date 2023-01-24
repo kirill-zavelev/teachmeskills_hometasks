@@ -1,35 +1,38 @@
 package by.teachmeskills.collections;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Box extends Container {
 
-    private Set<Ball> balls;
+    private int maxSize;
 
-    public Box(Set<Ball> balls) {
-        if (isSetHasMax10Balls(balls)) {
-            addBalls(balls);
-            this.balls = balls;
+    public Box(int maxSize) {
+        this.maxSize = maxSize;
+        this.balls = new HashSet<>();
+    }
+
+    public void addBalls(Set<Ball> balls) {
+        if (checkBallsSize(balls)) {
+            this.balls.addAll(balls);
         }
     }
 
-    private boolean isSetHasMax10Balls(Set<Ball> balls) {
-        if (balls.size() <= 10) {
+    private boolean checkBallsSize(Set<Ball> balls) {
+        if (balls.size() <= this.maxSize) {
             return true;
         } else {
-            System.out.println("Balls were not added. Box can contain max 10 balls. There are "
+            System.out.println("Balls were not added. Box can contain max " + maxSize + " balls. There are "
                     + balls.size() + " balls in current set.");
             return false;
         }
     }
 
-    public void sortBalls() {
-        if (this.balls != null) {
-            this.balls.stream().sorted().forEach(System.out::println);
-        } else {
-            System.out.println("The box can't be empty");
-        }
+    public List<Ball> getSortedBalls() {
+        return this.balls.stream().sorted().collect(Collectors.toList());
     }
 
     @Override
